@@ -7,8 +7,13 @@ function getAppointmentsForDay(state, day) {
         return(state.appointments[item]);
       })
     }
+    if(appointments.length===0){
+      return null;
+    }
+    return appointments;
   })
   return appointments
 }
 
 export default getAppointmentsForDay;
+
