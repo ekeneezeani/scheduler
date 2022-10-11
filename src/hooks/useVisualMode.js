@@ -23,13 +23,11 @@ export default function useVisualMode(initial) {
     setHistory(prev=>{
       if(prev.length>1){
         prev.pop()
+        setMode(prev[prev.length-1])
         return prev;
       }
-      return prev[0];
-    })
-    setMode(prev =>{
-      const mode = history[history.length-1];
-      return mode;
+      setMode(prev[0])
+      return [prev[0]];
     })
   }
 

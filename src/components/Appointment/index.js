@@ -46,6 +46,8 @@ function Appointment(props){
     }).catch(error =>transition(ERROR_DELETE,true))
   }
 
+  console.log("PROPS.IN", props.interview)
+
   return(
     <article className="appointment">
       <Header time={props.time}/>
@@ -85,6 +87,7 @@ function Appointment(props){
     interviewers={props.interviewers}
     onCancel={()=>back()}
     onSave = {save}
+    interviewer={props.interview.interviewer.id}
     student={props.interview.student}
     />)}
 

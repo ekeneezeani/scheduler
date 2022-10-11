@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "components/Button";
 import InterviewerList from "components/InterviewerList";
 
@@ -7,7 +7,7 @@ function Form(props){
   
 
   const [student, setStudent] = useState(props.student || "");
-  const [interviewer, setInterviewer] = useState(props.interviewer || null);
+  const [interviewer, setInterviewer] = useState(props.interviewer);
 
   const reset = () =>{
     setStudent("")
@@ -18,8 +18,7 @@ function Form(props){
     reset();
     props.onCancel(); 
   }
-
-
+  
   return(
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
