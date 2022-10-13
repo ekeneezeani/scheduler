@@ -79,7 +79,7 @@ function Appointment(props){
     <Confirm onCancel={()=>back()} 
     onConfirm={cancelInterview} 
     id={props.id}
-    message="Are you sure you want to delete?"/>} 
+    message="Are you sure you would like to delete?"/>} 
     {mode === DELETE && <Status message="Deleting"/>}  
 
     {mode === EDIT && (

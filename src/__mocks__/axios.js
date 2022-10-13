@@ -90,5 +90,13 @@ export default {
       /* Resolve appointments data */
       return Promise.resolve({ status: 204, statusText: "No Content" } );
 
+  }),
+
+  delete: jest.fn(url => {
+    // console.log("This is the url ",url)
+  
+      /* Resolve appointments data */
+      return Promise.resolve({ status: 204, statusText: "No Content" } );
+
   })
 };
