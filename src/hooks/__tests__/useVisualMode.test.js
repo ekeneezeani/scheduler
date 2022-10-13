@@ -14,7 +14,7 @@ test("useVisualMode should return to previous mode", () => {
   expect(result.current.mode).toBe(SECOND);
   console.log(result.current.mode)
 
-  act(() => result.current.transition(THIRD,true));
+  act(() => result.current.transition(THIRD,false));
   expect(result.current.mode).toBe(THIRD);
   console.log(result.current.mode)
 

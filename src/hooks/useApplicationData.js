@@ -16,9 +16,9 @@ export default function useApplicationData(){
   
   useEffect(()=>{
     Promise.all([
-      axios.get("http://localhost:8001/api/days"),
-      axios.get("http://localhost:8001/api/appointments"),
-      axios.get("http://localhost:8001/api/interviewers")
+      axios.get("/api/days"),
+      axios.get("/api/appointments"),
+      axios.get("/api/interviewers")
     ]).then((all)=>{
       setState(prev => ({...prev, days: all[0].data, appointments:all[1].data, interviewers:  all[2].data }));
     })
@@ -36,9 +36,10 @@ export default function useApplicationData(){
     };
 
    return axios.put(`/api/appointments/${id}`, appointment).then(()=>{
+    const days = updateSpots(state,appointments)
       setState({
         ...state,
-        appointments
+        appointments,days
       });
     })
 
@@ -46,7 +47,6 @@ export default function useApplicationData(){
   }
 
   function cancelInterview(id){
-    console.log(id)
     const appointment = {
       ...state.appointments[id], interview: null
     }
@@ -54,15 +54,37 @@ export default function useApplicationData(){
     const appointments = {
       ...state.appointments, [id]: appointment
     }
-    console.log(appointments)
+    // console.log(appointments)
     
     return axios.delete(`/api/appointments/${id}`, appointment).then(()=>{
+      const days = updateSpots(state,appointments)
       setState({
         ...state,
-        appointments
+        appointments,days
       });
     })
     
+  }
+
+
+  const updateSpots =  (state, appointments) => {
+    const newDays = [...state.days]
+    const index = newDays.findIndex(d => d.name === state.day);
+    const dayObj = newDays[index];
+
+    let spots = 0;
+
+    for(const id of dayObj.appointments){
+      const appointment = appointments[id]
+      if(!appointment.interview){
+        spots++;
+      }
+    }
+    
+    const day = {...dayObj, spots}
+    newDays[index] = day;
+
+    return newDays;
   }
   return {state,bookInterview, cancelInterview, setDay}
 }

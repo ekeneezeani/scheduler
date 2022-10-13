@@ -46,10 +46,10 @@ function Appointment(props){
     }).catch(error =>transition(ERROR_DELETE,true))
   }
 
-  console.log("PROPS.IN", props.interview)
+  // console.log("PROPS.IN", props.interview)
 
   return(
-    <article className="appointment">
+    <article className="appointment" data-testid="appointment">
       <Header time={props.time}/>
     
     {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
